@@ -1,5 +1,5 @@
 // variable for time remaining
-var secondsLeft = 90;
+var secondsLeft = 76;
 
 // this displays the time
 var timer = document.getElementById("timer");
@@ -18,6 +18,14 @@ var buttonAEL = document.getElementById("A");
 var buttonBEL = document.getElementById("B");
 var buttonCEL = document.getElementById("C");
 var buttonDEL = document.getElementById("D"); 
+
+var questionDiv = document.getElementById("question-div");
+
+var resultsEl = document.getElementById("results");
+var finalScore = document.getElementById("final-score");
+var saveInitals = document.getElementById("saveInitals");
+var scores = document.getElementById("scores");
+var userInitals = document.getElementById("user-initals");
 
 // questions
 var questionsArray = [
@@ -71,52 +79,79 @@ function displayQuestion() {
     questionEl.innerText = questionsArray[currentQuestion].question
     // TODO do this for the 4 button options
     buttonAEL.innerText = questionsArray[currentQuestion].option1
-    buttonAEL.innerText = questionsArray[currentQuestion].option2
-    buttonAEL.innerText = questionsArray[currentQuestion].option3
-    buttonAEL.innerText = questionsArray[currentQuestion].option4
+    buttonBEL.innerText = questionsArray[currentQuestion].option2
+    buttonCEL.innerText = questionsArray[currentQuestion].option3
+    buttonDEL.innerText = questionsArray[currentQuestion].option4
 }
 // function to check the answer
-function checkAnswer(event) {
-    event.preventDefault();
+function checkAnswer(answer) {
+    if (answer !== questionsArray[currentQuestion].correct) {
+        secondsLeft = secondsLeft -5
+        timer.textContent = `Time:${secondsLeft}s`;
+    }
+  
 }
 
 // if buttons text !== correct than -5 from the time
 
 // function for the timer/interval
 function setTime() {
+    timer.style.display="block";
+    timer.innerText = "Time: " + secondsLeft +"s";
     var timerInterval = setInterval(function () {
-        secondsleft--;
-        timerInterval.textContent = 'Time:${secondsLeft}s';
+        secondsLeft--;
+        timer.innerText = "Time: " + secondsLeft +"s";
 
-        if (secondsLeft === 0 || questionCount === questionsArray.length) {
+        if (secondsLeft === 0 || currentQuestion === questionsArray.length) {
             clearInterval(timerInterval);
-            questionsArray.style.display = "none";
-            
+            questionDiv.style.display = "none";
+            resultsEl.style.display = "flex";
+            //display none timer
+// take final score p tag and put seconds left (inner text)
         }
-    }
+    },1000
     )}
+// add event listener to save initals button
+// get the value or innertext of the user initals input
+// {
+    // score:secondsLeft,
+    // initals:value from input
+//}
+// add object to highscores array
+// save that array to local storage (stringify)
+// get it out of local storage (parse)
+// if there is an item in local storage then the highscore array = that item else the HS array is an empty array
 
-// Hiding start button after click
-// Create a new score div and hide until end of quiz
-startButton.addEventListener("click", displayQuestion);
+
+startButton.addEventListener("click", function(event){
+event.preventDefault()
+questionDiv.style.display = "flex";
+startButton.style.display = "none";
+setTime()
+displayQuestion()
+});
 buttonAEL.addEventListener("click" , function(event) {
     event.preventDefault()
     //check answer function will be called here
+    checkAnswer(event.target.innerText);
     currentQuestion++
     displayQuestion()
 })
 buttonBEL.addEventListener("click" , function(event) {
     event.preventDefault()
+    checkAnswer(event.target.innerText);
     currentQuestion++
     displayQuestion()
 })
 buttonCEL.addEventListener("click" , function(event) {
     event.preventDefault()
+    checkAnswer(event.target.innerText);
     currentQuestion++
     displayQuestion()
 })
 buttonDEL.addEventListener("click" , function(event) {
     event.preventDefault()
+    checkAnswer(event.target.innerText);
     currentQuestion++
     displayQuestion()
 })

@@ -1,0 +1,17 @@
+.hide {
+    display: none;
+}
+
+#question {
+    width: 100%;
+    text-align: center;
+}
+
+#question-div {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#question-div button {
+    margin: 20px;
+}

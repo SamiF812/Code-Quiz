@@ -13,10 +13,9 @@
 <!-- layed out the content and buttons the app will require -->
 <body>
   <input id="view-scores" type="button" value="View Scores">
-  <span id="timer">Time: 0</span>
-  <div id="scores-div"></div>
+  <p id="timer" class = "hide">Time: 0</p>
   <br>
-  <div id="question-div">
+  <div id="question-div" class = "hide"> 
     <p id="question"></p>
     <button id="A"></button>
     <button id="B"></button>
@@ -24,9 +23,13 @@
     <button id="D"></button>
   </div>
   <br>
-  <div id="choices"></div>
+  <div id="results" class="hide">
+    <p id="final-score"></p>
+    <input id="user-initals" type="text" placeholder="Initals go here"/>
+    <button id="saveInitals">Submit</button>
+  </div>
   <br>
-  <form id="results"></form>
+  <div id="scores"></div>
   <div id="buttons">
     <input id="start-button" type="button" value="Start Quiz">
   </div>
