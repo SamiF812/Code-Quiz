@@ -1,10 +1,11 @@
+// How i am calling scores from the second HTML file in HS HTML
 let scoresTwo = document.getElementById("scoresTwo");
 
-
+//initiating
 function init() {
     printScore();
 }
-
+// printing score out of local storage
 function printScore() {
     var savedScores = JSON.parse(localStorage.getItem("highScores")) || [];
 
@@ -17,7 +18,7 @@ function printScore() {
     })
 
 }
-
+//clears high scores out of local storage and off of the scores page
 function clearHighScores(){
 window.localStorage.removeItem("highScores");
 window.location.reload()

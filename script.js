@@ -13,14 +13,14 @@ var viewScoresBtn = document.getElementById("view-scores");
 
 // start button
 var startButton = document.getElementById("start-button"); 
-
+// buttons for the choices per question
 var buttonAEL = document.getElementById("A");
 var buttonBEL = document.getElementById("B");
 var buttonCEL = document.getElementById("C");
 var buttonDEL = document.getElementById("D"); 
 
 var questionDiv = document.getElementById("question-div");
-
+// variables that allowed me to get scores and intials
 var resultsEl = document.getElementById("results");
 var finalScore = document.getElementById("final-score");
 var saveInitals = document.getElementById("saveInitals");
@@ -70,7 +70,7 @@ var questionsArray = [
         correct: "// this is a comment"
     }
 ]
-
+//How the questions were displayed
 var currentQuestion = 0
 questionsArray[currentQuestion]
 
@@ -112,7 +112,8 @@ function setTime() {
     },1000
     )}
 // add event listener to save initals button
-
+// this is creating a submit button and telling it what is being captured in the submission
+// also adding the info to local storage
     var submitBtn = document.getElementById("saveInitals");
         saveInitals.addEventListener("click", function(event) {
         event.preventDefault()
