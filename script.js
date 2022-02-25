@@ -12,7 +12,7 @@ var buttonsDiv = document.getElementById("buttons");
 var viewScoresBtn = document.getElementById("view-scores");
 
 // start button
-var startButton = document.getElementById("start-button");
+var startButton = document.getElementById("start-button"); 
 
 var buttonAEL = document.getElementById("A");
 var buttonBEL = document.getElementById("B");
@@ -76,12 +76,11 @@ questionsArray[currentQuestion]
 
 function displayQuestion() {
     var questionEl = document.getElementById("question");
-    questionEl.innerText = questionsArray[currentQuestion].question
-    // TODO do this for the 4 button options
-    buttonAEL.innerText = questionsArray[currentQuestion].option1
-    buttonBEL.innerText = questionsArray[currentQuestion].option2
-    buttonCEL.innerText = questionsArray[currentQuestion].option3
-    buttonDEL.innerText = questionsArray[currentQuestion].option4
+    questionEl.innerText = questionsArray[currentQuestion].question;
+    buttonAEL.innerText = questionsArray[currentQuestion].option1;
+    buttonBEL.innerText = questionsArray[currentQuestion].option2;
+    buttonCEL.innerText = questionsArray[currentQuestion].option3;
+    buttonDEL.innerText = questionsArray[currentQuestion].option4;
 }
 // function to check the answer
 function checkAnswer(answer) {
@@ -106,19 +105,42 @@ function setTime() {
             clearInterval(timerInterval);
             questionDiv.style.display = "none";
             resultsEl.style.display = "flex";
-            //display none timer
-// take final score p tag and put seconds left (inner text)
+            timer.style.display = "none"
+            finalScore.innerText ="Time remaining:   " + secondsLeft;
+            
         }
     },1000
     )}
 // add event listener to save initals button
+
+    var submitBtn = document.getElementById("saveInitals");
+        saveInitals.addEventListener("click", function(event) {
+        event.preventDefault()
+        var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+        
+        var initals = userInitals.value;
+        var score = secondsLeft
+        var recordedScore = {
+            initals: initals,
+            score: score,
+        };
+
+        highScores.push(recordedScore);
+
+        localStorage.setItem("highScores", JSON.stringify(highScores))
+        location.replace("./highscore.html")
+    })
+
+        viewScoresBtn.addEventListener("click", function() {
+            location.replace("./highscore.html");
+        })
 // get the value or innertext of the user initals input
 // {
     // score:secondsLeft,
     // initals:value from input
 //}
-// add object to highscores array
-// save that array to local storage (stringify)
+// add object to highscores arrayt
+// save that array to local storage (sringify)
 // get it out of local storage (parse)
 // if there is an item in local storage then the highscore array = that item else the HS array is an empty array
 
